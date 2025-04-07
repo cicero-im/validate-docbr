@@ -1,7 +1,7 @@
-from random import sample
 from typing import Union
 
 from .BaseDoc import BaseDoc
+import secrets
 
 
 class RENAVAM(BaseDoc):
@@ -26,7 +26,7 @@ class RENAVAM(BaseDoc):
 
     def generate(self, mask: bool = False) -> str:
         """Gerar Renavam."""
-        renavam = [str(sample(self.digits, 1)[0]) for i in range(10)]
+        renavam = [str(secrets.SystemRandom().sample(self.digits, 1)[0]) for i in range(10)]
         renavam.append(self._generate_last_digit(renavam))
 
         renavam = ''.join(renavam)

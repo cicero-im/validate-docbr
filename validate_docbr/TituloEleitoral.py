@@ -1,7 +1,7 @@
-from random import sample
 from typing import List
 
 from .BaseDoc import BaseDoc
+import secrets
 
 
 class TituloEleitoral(BaseDoc):
@@ -35,7 +35,7 @@ class TituloEleitoral(BaseDoc):
 
     def generate(self, mask: bool = False) -> str:
         """Método para gerar um título eleitoral válido."""
-        document_digits = [sample(self.digits, 1)[0] for _ in range(8)]
+        document_digits = [secrets.SystemRandom().sample(self.digits, 1)[0] for _ in range(8)]
 
         state_identifier = self._generate_valid_state_identifier()
         document_digits.extend(map(int, state_identifier))
@@ -100,5 +100,5 @@ class TituloEleitoral(BaseDoc):
         return total % 11
 
     def _generate_valid_state_identifier(self) -> str:
-        state_identifier = str(sample(range(1, 19), 1)[0])
+        state_identifier = str(secrets.SystemRandom().sample(range(1, 19), 1)[0])
         return state_identifier.zfill(2)

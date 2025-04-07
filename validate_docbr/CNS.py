@@ -1,6 +1,6 @@
-from random import sample
 
 from .BaseDoc import BaseDoc
+import secrets
 
 
 class CNS(BaseDoc):
@@ -37,7 +37,7 @@ class CNS(BaseDoc):
     def generate(self, mask: bool = False) -> str:
         """Gerar CNS."""
         # Primeiro dígito válido
-        cns = [str(sample(self.first_digit, 1)[0])]
+        cns = [str(secrets.SystemRandom().sample(self.first_digit, 1)[0])]
 
         # Geração irá depender do resultado do primeiro dígito
         if cns[0] in ['1', '2']:
@@ -57,7 +57,7 @@ class CNS(BaseDoc):
         """Gera um CNS válido para os casos que se inicia com 1 ou 2."""
         if generate_random:
             # Adiciona os próximos 10 dígitos
-            cns = cns + [str(sample(self.digits, 1)[0]) for i in range(10)]
+            cns = cns + [str(secrets.SystemRandom().sample(self.digits, 1)[0]) for i in range(10)]
         else:
             # Pega apenas a parte que precisamos do CNS
             cns = cns[:11]
@@ -82,7 +82,7 @@ class CNS(BaseDoc):
     def _generate_second_case(self, cns: list) -> list:
         """Gera um CNS válido para os casos que se inicia com 7, 8 ou 9."""
         # Gerar os próximos 14 dígitos
-        cns = cns + [str(sample(list(range(10)), 1)[0]) for i in range(14)]
+        cns = cns + [str(secrets.SystemRandom().sample(list(range(10)), 1)[0]) for i in range(14)]
         sum = self._sum_algorithm(cns)
         rest = sum % 11
 

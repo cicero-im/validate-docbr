@@ -1,6 +1,6 @@
-from random import sample
 
 from .BaseDoc import BaseDoc
+import secrets
 
 
 class Certidao(BaseDoc):
@@ -44,7 +44,7 @@ class Certidao(BaseDoc):
     def generate(self, mask: bool = False) -> str:
         """Método para gerar a Certidão de Nascimento/Casamento/Óbito."""
         # Os trinta primeiros dígitos
-        certidao = [str(sample(self.digits, 1)[0]) for i in range(30)]
+        certidao = [str(secrets.SystemRandom().sample(self.digits, 1)[0]) for i in range(30)]
 
         # Gerar os dígitos verificadores
         certidao.append(self._generate_verifying_digit(certidao))
