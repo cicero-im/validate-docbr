@@ -1,7 +1,7 @@
-from random import sample
 from typing import Union
 
 from .BaseDoc import BaseDoc
+import secrets
 
 
 class CNH(BaseDoc):
@@ -27,7 +27,7 @@ class CNH(BaseDoc):
 
     def generate(self, mask: bool = False) -> str:
         """Gerar CNH."""
-        cnh = [str(sample(self.digits, 1)[0]) for i in range(9)]
+        cnh = [str(secrets.SystemRandom().sample(self.digits, 1)[0]) for i in range(9)]
         cnh.append(self._generate_first_digit(cnh))
         cnh.append(self._generate_second_digit(cnh))
 

@@ -1,7 +1,7 @@
-from random import sample
 from typing import Union
 
 from .BaseDoc import BaseDoc
+import secrets
 
 
 class PIS(BaseDoc):
@@ -26,7 +26,7 @@ class PIS(BaseDoc):
 
     def generate(self, mask: bool = False) -> str:
         """Gerar PIS/NIS/PASEP/NIT."""
-        pis = [str(sample(self.digits, 1)[0]) for i in range(10)]
+        pis = [str(secrets.SystemRandom().sample(self.digits, 1)[0]) for i in range(10)]
         pis.append(self._generate_digit(pis))
 
         pis = ''.join(pis)

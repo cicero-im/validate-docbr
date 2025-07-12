@@ -1,7 +1,7 @@
-from random import sample
 from typing import Union
 
 from .BaseDoc import BaseDoc
+import secrets
 
 
 class CNPJ(BaseDoc):
@@ -28,7 +28,7 @@ class CNPJ(BaseDoc):
     def generate(self, mask: bool = False) -> str:
         """Gerar CNPJ."""
         # Os doze primeiros dígitos
-        cnpj = [str(sample(self.digits, 1)[0]) for i in range(12)]
+        cnpj = [str(secrets.SystemRandom().sample(self.digits, 1)[0]) for i in range(12)]
 
         # Gerar os dígitos verificadores
         cnpj.append(self._generate_first_digit(cnpj))

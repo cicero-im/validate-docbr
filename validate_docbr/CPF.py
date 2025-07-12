@@ -1,7 +1,7 @@
-from random import sample
 from typing import List
 
 from .BaseDoc import BaseDoc
+import secrets
 
 
 class CPF(BaseDoc):
@@ -30,7 +30,7 @@ class CPF(BaseDoc):
     def generate(self, mask: bool = False) -> str:
         """Gerar CPF."""
         # Os nove primeiros dígitos
-        cpf = [str(sample(self.digits, 1)[0]) for i in range(9)]
+        cpf = [str(secrets.SystemRandom().sample(self.digits, 1)[0]) for i in range(9)]
 
         # Gerar os dígitos verificadores
         cpf.append(self._generate_first_digit(cpf))
